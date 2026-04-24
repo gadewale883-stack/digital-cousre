@@ -49,6 +49,16 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
+// Import local assets
+import heroVideo from "./assets/hero-video.mp4";
+import heroVideoAlt from "./assets/hero-video-alt.mp4";
+import instructorImg from "./assets/instructor.jpg";
+import proofAccessImg from "./assets/proof-access.jpg";
+import proofEarningsImg from "./assets/proof-earnings.jpg";
+import proofNigeriaImg from "./assets/proof-nigeria.jpg";
+import proofPaymentImg from "./assets/proof-payment.jpg";
+import proofReceiptImg from "./assets/proof-receipt.jpg";
+
 const WHATSAPP_NUMBER = "2348112222684";
 const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=Hello! I'm interested in the Amomak Digital Academy 20 Course Bundle for R200. Please give me access.`;
 
@@ -340,9 +350,10 @@ export default function App() {
             playsInline
             preload="auto"
             className="w-full h-full object-cover opacity-60"
+            poster={instructorImg}
           >
-            <source src="/hero-video.mp4" type="video/mp4" />
-            <source src="/hero-video-alt.mp4" type="video/mp4" />
+            <source src={heroVideo} type="video/mp4" />
+            <source src={heroVideoAlt} type="video/mp4" />
           </video>
           <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black/80" />
         </div>
@@ -526,10 +537,9 @@ export default function App() {
               <div className="absolute inset-0 bg-[#FFD700] rounded-[40px] md:rounded-[60px] rotate-6 z-0" />
               <div className="relative z-10 aspect-[4/5] bg-black rounded-[40px] md:rounded-[60px] overflow-hidden border-4 border-white shadow-2xl">
                 <img 
-                  src="/instructor.jpg" 
+                  src={instructorImg} 
                   className="w-full h-full object-cover" 
                   alt="Lead Instructor"
-                  referrerPolicy="no-referrer"
                 />
               </div>
               <div className="absolute -bottom-4 -left-4 md:-bottom-6 md:-left-6 bg-white p-4 md:p-6 rounded-2xl shadow-xl border border-black/5 z-20">
@@ -806,7 +816,7 @@ export default function App() {
                     <div className="bg-[#202c33] p-3 rounded-2xl rounded-tl-none max-w-[85%] text-[13px] shadow-lg border border-white/5 space-y-3">
                        <div className="relative group">
                           <img 
-                            src="/proof-receipt.jpg" 
+                            src={proofReceiptImg} 
                             alt="Payment Proof" 
                             className="w-full h-48 object-cover rounded-xl border border-white/10"
                           />
@@ -881,11 +891,11 @@ export default function App() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
             {[
-              { img: "/proof-access.jpg", title: "Instant Access", text: "Student getting link seconds after payment." },
-              { img: "/proof-earnings.jpg", title: "Earnings Proof", text: "Reselling the bundle for 100% profit." },
-              { img: "/proof-payment.jpg", title: "Payment Confirmation", text: "Successful R200 transactions." },
-              { img: "/proof-nigeria.jpg", title: "Nigerian Success", text: "Local students scaling their digital skills." },
-              { img: "/proof-receipt.jpg", title: "Verified Receipt", text: "Official transaction proof from bank app." },
+              { img: proofAccessImg, title: "Instant Access", text: "Student getting link seconds after payment." },
+              { img: proofEarningsImg, title: "Earnings Proof", text: "Reselling the bundle for 100% profit." },
+              { img: proofPaymentImg, title: "Payment Confirmation", text: "Successful R200 transactions." },
+              { img: proofNigeriaImg, title: "Nigerian Success", text: "Local students scaling their digital skills." },
+              { img: proofReceiptImg, title: "Verified Receipt", text: "Official transaction proof from bank app." },
               { img: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=2574&auto=format&fit=crop", title: "Global Reach", text: "Joining our 50k+ strong community." }
             ].map((item, i) => (
               <motion.div 
