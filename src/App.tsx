@@ -104,7 +104,7 @@ const testimonials = [
 ];
 
 export default function App() {
-  const [timeLeft, setTimeLeft] = useState({ hours: 2, minutes: 47, seconds: 35 });
+  const [timeLeft, setTimeLeft] = useState({ hours: 24, minutes: 0, seconds: 0 });
   const [selectedCourse, setSelectedCourse] = useState<typeof courses[0] | null>(null);
   const [isPurchaseModalOpen, setIsPurchaseModalOpen] = useState(false);
   const [viewingCount, setViewingCount] = useState(142);
@@ -135,45 +135,37 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-[#FFD700] selection:text-black">
-      {/* Scarcity Bar */}
-      <div className="bg-[#FFD700] text-black py-2 overflow-hidden relative z-[70]">
-        <motion.div 
-          animate={{ x: [0, -1000] }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="flex whitespace-nowrap gap-12 font-bold text-[10px] uppercase tracking-widest items-center"
-        >
-          {[1,2,3,4,5,6,7,8,9,10].map(i => (
-            <div key={i} className="flex items-center gap-4">
-              <span>⚠️ PRICE INCREASES TO R2000 IN 24 HOURS</span>
-              <div className="w-1.5 h-1.5 rounded-full bg-black" />
-              <span>ONLY 7 SPOTS LEFT AT R200 TODAY</span>
-              <div className="w-1.5 h-1.5 rounded-full bg-black" />
-              <span>JOIN 50,000+ SUCCESSFUL STUDENTS</span>
-              <div className="w-1.5 h-1.5 rounded-full bg-black" />
-            </div>
-          ))}
-        </motion.div>
-      </div>
-      {/* Scarcity Bar */}
-      <div className="bg-[#FFD700] text-black py-2 overflow-hidden relative z-[70]">
-        <motion.div 
-          animate={{ x: [0, -1000] }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="flex whitespace-nowrap gap-12 font-bold text-[10px] uppercase tracking-widest items-center"
-        >
-          {[1,2,3,4,5,6,7,8,9,10].map(i => (
-            <div key={i} className="flex items-center gap-4">
-              <span>⚠️ PRICE INCREASES TO R2000 IN 24 HOURS</span>
-              <div className="w-1.5 h-1.5 rounded-full bg-black" />
-              <span>ONLY 7 SPOTS LEFT AT R200 TODAY</span>
-              <div className="w-1.5 h-1.5 rounded-full bg-black" />
-              <span>JOIN 50,000+ SUCCESSFUL STUDENTS</span>
-              <div className="w-1.5 h-1.5 rounded-full bg-black" />
-            </div>
-          ))}
-        </motion.div>
-      </div>
+    <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-[#FFD700] selection:text-black overflow-x-hidden">
+      {/* Sticky Floating Banner */}
+      <motion.div 
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        className="fixed top-0 left-0 w-full z-[100] bg-black/95 backdrop-blur-xl border-b border-[#FFD700]/20 py-3 hidden md:block"
+      >
+        <div className="max-w-7xl mx-auto px-4 flex items-center justify-between">
+          <div className="flex items-center gap-6">
+            <Badge className="bg-[#FFD700] text-black font-bold animate-pulse">FLASH SALE</Badge>
+            <p className="text-sm font-bold tracking-tight">
+              ⚠️ PRICE INCREASES TO <span className="text-[#D91B1B]">R2000</span> IN {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s
+            </p>
+          </div>
+          <div className="flex items-center gap-6">
+             <div className="flex -space-x-2">
+                {[1,2,3].map(i => <img key={i} src={`https://i.pravatar.cc/100?u=${i+10}`} className="w-8 h-8 rounded-full border-2 border-black" alt="user" />)}
+             </div>
+             <p className="text-[10px] uppercase font-bold opacity-50 tracking-widest">78 others are buying right now</p>
+             <Button 
+               size="sm" 
+               variant="outline"
+               onClick={openPurchaseModal}
+               className="border-[#FFD700] text-[#FFD700] hover:bg-[#FFD700] hover:text-black font-bold rounded-full px-8"
+             >
+               CLAIM R200 DEAL
+             </Button>
+          </div>
+        </div>
+      </motion.div>
+
       {/* Compliance Modal */}
       {(activeTab === "privacy" || activeTab === "terms") && (
         <div className="fixed inset-0 z-[110] flex items-center justify-center p-4">
@@ -340,21 +332,18 @@ export default function App() {
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 overflow-hidden min-h-[80vh] flex items-center">
         {/* Video Background */}
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 z-0 bg-black">
           <video
             autoPlay
             muted
             loop
             playsInline
-            className="w-full h-full object-cover"
-            onError={(e) => {
-              (e.target as HTMLVideoElement).parentElement?.classList.add('hidden');
-            }}
+            preload="auto"
+            className="w-full h-full object-cover opacity-60"
           >
             <source src="/60fb817a-74bc-4898-a3df-6a6f0d7167de.mp4" type="video/mp4" />
           </video>
-          {/* Video Overlay - Darkening to ensure text readability */}
-          <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black/80" />
         </div>
 
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full pointer-events-none z-[5]">
@@ -378,32 +367,32 @@ export default function App() {
               </p>
             </div>
 
-            <h1 className="font-heading text-4xl sm:text-6xl md:text-8xl lg:text-9xl leading-[0.9] tracking-tighter uppercase px-2">
-              AMOMAK <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D91B1B] via-[#FFD700] to-[#D91B1B]">DIGITAL</span> <br />
+            <h1 className="font-heading text-3xl sm:text-5xl md:text-7xl lg:text-8xl leading-[1.1] md:leading-[0.9] tracking-tighter uppercase px-2">
+              AMOMAK <br className="hidden sm:block" />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D91B1B] via-[#FFD700] to-[#D91B1B]">DIGITAL</span> <br className="hidden sm:block" />
               ACADEMY
             </h1>
-            <p className="max-w-2xl mx-auto text-white/60 text-base md:text-xl font-display px-6">
+            <p className="max-w-2xl mx-auto text-white/60 text-sm md:text-xl font-display px-6 leading-relaxed">
               Master high-income skills and start your digital empire today. 
               Includes a full resale license—buy once, sell forever for 100% profit.
             </p>
 
-            <div className="flex flex-col md:flex-row items-center justify-center gap-6 pt-10">
-              <div className="flex items-center gap-6 md:gap-4">
+            <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6 pt-6 md:pt-10">
+              <div className="flex items-center gap-6 md:gap-4 bg-white/5 md:bg-transparent p-4 md:p-0 rounded-2xl md:rounded-none w-full md:w-auto justify-center border border-white/5 md:border-none">
                 <div className="text-center md:text-left">
-                  <p className="text-white/40 text-[10px] uppercase tracking-widest font-bold">Total Value</p>
-                  <p className="text-xl line-through text-white/30 font-bold">R5,000</p>
+                  <p className="text-white/40 text-[8px] md:text-[10px] uppercase tracking-widest font-bold">Value</p>
+                  <p className="text-lg md:text-xl line-through text-white/30 font-bold">R5,000</p>
                 </div>
                 <div className="w-px h-8 bg-white/10" />
                 <div className="text-center md:text-left">
-                  <p className="text-[#FFD700] text-[10px] uppercase tracking-widest font-bold">Today's Price</p>
-                  <p className="text-4xl md:text-6xl font-heading text-white">R200</p>
+                  <p className="text-[#FFD700] text-[8px] md:text-[10px] uppercase tracking-widest font-bold">Today</p>
+                  <p className="text-3xl md:text-5xl font-heading text-white">R200</p>
                 </div>
               </div>
               <Button 
                 size="lg" 
                 onClick={openPurchaseModal}
-                className="w-full md:w-auto bg-[#D91B1B] hover:bg-[#B71616] text-white text-lg font-bold h-16 px-10 rounded-2xl shadow-[0_0_30px_rgba(217,27,27,0.4)] group"
+                className="w-full md:w-auto bg-[#D91B1B] hover:bg-[#B71616] text-white text-lg font-bold h-16 px-10 rounded-2xl shadow-[0_20px_40px_rgba(217,27,27,0.4)] group active:scale-95 transition-all"
               >
                 GET INSTANT ACCESS <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
@@ -439,12 +428,12 @@ export default function App() {
       </section>
 
       {/* How to Buy Section */}
-      <section className="py-24 bg-white text-black">
+      <section className="py-12 md:py-24 bg-white text-black">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16 space-y-4">
+          <div className="text-center mb-10 md:mb-16 space-y-4">
             <Badge className="bg-[#D91B1B] text-white font-bold px-4 py-1 uppercase tracking-widest text-[10px]">Simple 3-Step Process</Badge>
-            <h2 className="font-heading text-4xl sm:text-5xl md:text-7xl uppercase">HOW TO GET INSTANT ACCESS</h2>
-            <p className="text-black/60 max-w-2xl mx-auto text-lg">
+            <h2 className="font-heading text-3xl sm:text-5xl md:text-7xl uppercase">HOW TO GET INSTANT ACCESS</h2>
+            <p className="text-black/60 max-w-2xl mx-auto text-sm md:text-lg">
               Getting your 20-course bundle is quick and easy. Follow these steps to start learning today.
             </p>
           </div>
@@ -486,21 +475,21 @@ export default function App() {
       </section>
 
       {/* Mission & Vision Section */}
-      <section className="py-24 bg-[#0A0A0A] border-y border-white/5 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-[30%] h-[30%] bg-[#D91B1B]/10 blur-[100px] rounded-full" />
+      <section className="py-12 md:py-24 bg-[#0A0A0A] border-y border-white/5 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-[40%] h-[40%] bg-[#D91B1B]/10 blur-[120px] rounded-full" />
         <div className="max-w-7xl mx-auto px-4 relative z-10">
-          <div className="grid md:grid-cols-2 gap-12">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12">
             <motion.div 
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="bg-white/5 p-10 rounded-[40px] border border-white/10 space-y-6"
+              className="bg-white/5 p-8 md:p-10 rounded-[32px] md:rounded-[40px] border border-white/10 space-y-6"
             >
               <div className="w-12 h-12 bg-[#FFD700] rounded-xl flex items-center justify-center text-black">
                 <Target className="w-6 h-6" />
               </div>
-              <h2 className="font-heading text-4xl uppercase">OUR MISSION</h2>
-              <p className="text-white/70 text-lg leading-relaxed">
+              <h2 className="font-heading text-3xl md:text-4xl uppercase">OUR MISSION</h2>
+              <p className="text-white/70 text-base md:text-lg leading-relaxed">
                 To empower individuals across Africa by providing affordable access to high-income digital skills and the necessary tools to achieve financial independence in the modern economy.
               </p>
             </motion.div>
@@ -524,17 +513,17 @@ export default function App() {
       </section>
 
       {/* Meet the Instructor Section */}
-      <section className="py-24 bg-white text-black">
+      <section className="py-20 md:py-32 bg-white text-black">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-center gap-12 md:gap-20">
+          <div className="flex flex-col md:flex-row items-center gap-10 md:gap-20">
             <motion.div 
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="relative w-full max-w-sm"
+              className="relative w-full max-w-[280px] md:max-w-sm"
             >
-              <div className="absolute inset-0 bg-[#FFD700] rounded-[60px] rotate-6 z-0" />
-              <div className="relative z-10 aspect-[4/5] bg-black rounded-[60px] overflow-hidden border-4 border-white shadow-2xl">
+              <div className="absolute inset-0 bg-[#FFD700] rounded-[40px] md:rounded-[60px] rotate-6 z-0" />
+              <div className="relative z-10 aspect-[4/5] bg-black rounded-[40px] md:rounded-[60px] overflow-hidden border-4 border-white shadow-2xl">
                 <img 
                   src="/d9d41f6b647531ad35b7af392cf1b939.jpg" 
                   className="w-full h-full object-cover" 
@@ -542,43 +531,43 @@ export default function App() {
                   referrerPolicy="no-referrer"
                 />
               </div>
-              <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-2xl shadow-xl border border-black/5 z-20 hidden md:block">
-                <p className="font-heading text-3xl">10+ YEARS</p>
-                <p className="text-[10px] uppercase font-bold tracking-widest opacity-40">Digital Experience</p>
+              <div className="absolute -bottom-4 -left-4 md:-bottom-6 md:-left-6 bg-white p-4 md:p-6 rounded-2xl shadow-xl border border-black/5 z-20">
+                <p className="font-heading text-2xl md:text-3xl">10+ YEARS</p>
+                <p className="text-[8px] md:text-[10px] uppercase font-bold tracking-widest opacity-40">Digital Experience</p>
               </div>
             </motion.div>
 
-            <div className="flex-1 space-y-8">
+            <div className="flex-1 space-y-6 md:space-y-8 text-center md:text-left pt-6 md:pt-0">
               <div className="space-y-4">
                 <Badge className="bg-[#D91B1B] text-white font-bold px-4 py-1">MEET THE FOUNDER</Badge>
-                <h2 className="font-heading text-5xl md:text-7xl uppercase leading-none">
-                  AMOMAK <br />
+                <h2 className="font-heading text-3xl md:text-6xl uppercase leading-none">
+                  AMOMAK <br className="md:hidden" />
                   <span className="text-[#D91B1B]">DIGITAL GURU</span>
                 </h2>
-                <p className="text-xl text-black/70 leading-relaxed font-display">
+                <p className="text-base md:text-xl text-black/70 leading-relaxed font-display px-4 md:px-0">
                   "My goal is simple: To show you that your smartphone is a goldmine. I've spent the last decade mastering the digital world, and now I'm handing you the exact blue-print I used to help 50,000+ people achieve financial freedom."
                 </p>
               </div>
 
-              <div className="grid grid-cols-2 gap-6">
+              <div className="grid grid-cols-2 gap-4 md:gap-6 max-w-sm mx-auto md:mx-0">
                 {[
                   { label: "Students Taught", value: "50,000+" },
                   { label: "Digital Products", value: "200+" },
                   { label: "Years Experience", value: "10+" },
                   { label: "Community", value: "Active 24/7" }
                 ].map((stat, i) => (
-                  <div key={i} className="border-l-4 border-[#FFD700] pl-4">
-                    <p className="text-2xl font-heading leading-none">{stat.value}</p>
-                    <p className="text-[10px] uppercase font-bold opacity-40">{stat.label}</p>
+                  <div key={i} className="border-l-4 border-[#FFD700] pl-3 md:pl-4 text-left">
+                    <p className="text-xl md:text-2xl font-heading leading-none">{stat.value}</p>
+                    <p className="text-[8px] md:text-[10px] uppercase font-bold opacity-40">{stat.label}</p>
                   </div>
                 ))}
               </div>
 
               <Button 
                 onClick={openPurchaseModal}
-                className="bg-black text-white hover:bg-black/90 font-bold h-14 px-8 rounded-2xl"
+                className="w-full md:w-auto bg-black text-white hover:bg-black/90 font-bold h-14 px-10 rounded-2xl shadow-xl"
               >
-                JOIN THE ACADEMY TODAY <ArrowRight className="ml-2" />
+                JOIN THE ACADEMY <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </div>
           </div>
@@ -603,20 +592,19 @@ export default function App() {
       </section>
 
       {/* Resell Highlight */}
-      <section className="py-20 bg-[#D91B1B]">
+      <section className="py-12 md:py-20 bg-[#D91B1B]">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center">
+          <div className="grid md:grid-cols-2 gap-10 md:gap-12 items-center">
+            <div className="space-y-6 text-center md:text-left">
+              <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto md:mx-0">
                 <TrendingUp className="w-8 h-8 text-white" />
               </div>
-              <h2 className="font-heading text-4xl md:text-6xl uppercase leading-none">
+              <h2 className="font-heading text-3xl md:text-6xl uppercase leading-none">
                 BUY & RESELL FOR <br />
                 <span className="text-black">100% PROFIT</span>
               </h2>
-              <p className="text-white/90 text-lg">
+              <p className="text-white/90 text-base md:text-lg">
                 This isn't just a learning bundle. It's a business in a box. 
-                We give you the full rights to resell these courses as your own. 
                 Keep every single cent you make.
               </p>
               <ul className="space-y-3">
@@ -1090,26 +1078,26 @@ export default function App() {
       </section>
 
       {/* Final CTA */}
-      <section className="py-24 bg-[#D91B1B] text-center">
+      <section className="py-16 md:py-24 bg-[#D91B1B] text-center">
         <div className="max-w-4xl mx-auto px-4 space-y-8">
-          <Zap className="w-16 h-16 mx-auto text-[#FFD700] animate-pulse" />
-          <h2 className="font-heading text-5xl sm:text-6xl md:text-8xl uppercase leading-none">
+          <Zap className="w-12 h-12 md:w-16 md:h-16 mx-auto text-[#FFD700] animate-pulse" />
+          <h2 className="font-heading text-3xl sm:text-6xl md:text-8xl uppercase leading-tight">
             DON'T MISS OUT ON <br />
             THIS <span className="text-black">CRAZY DEAL</span>
           </h2>
-          <p className="text-xl text-white/90 font-display">
+          <p className="text-base md:text-xl text-white/90 font-display">
             The price will return to R5,000 very soon. Secure your future for the price of a meal.
           </p>
           <div className="pt-4">
             <Button 
               size="lg" 
               onClick={openPurchaseModal}
-              className="w-full md:w-auto bg-black hover:bg-black/80 text-white text-xl md:text-2xl font-bold h-20 px-12 rounded-2xl group"
+              className="w-full md:w-auto bg-black hover:bg-black/80 text-white text-lg md:text-2xl font-bold h-20 px-12 rounded-2xl group transition-all"
             >
-              YES! I WANT ACCESS FOR R200 <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+              YES! I WANT ACCESS <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
             </Button>
           </div>
-          <p className="text-sm font-bold uppercase tracking-widest text-black/60">
+          <p className="text-[10px] md:text-sm font-bold uppercase tracking-widest text-black/60">
             Secure Payment • Instant Access • 100% Satisfaction
           </p>
         </div>
@@ -1138,17 +1126,26 @@ export default function App() {
       </footer>
 
       {/* Sticky Mobile CTA */}
-      <div className="fixed bottom-4 left-1/2 -translate-x-1/2 w-[92%] max-w-md z-50 md:hidden">
-        <Button 
-          onClick={openPurchaseModal}
-          className="w-full bg-[#D91B1B] hover:bg-[#B71616] text-white font-bold h-16 rounded-2xl shadow-[0_10px_30px_rgba(217,27,27,0.4)] flex items-center justify-between px-6 border-2 border-white/20"
+      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] max-w-sm z-50 md:hidden">
+        <motion.div 
+          initial={{ y: 100 }}
+          animate={{ y: 0 }}
+          className="bg-black/90 backdrop-blur-xl rounded-[32px] p-2 border border-white/10 shadow-2xl flex items-center justify-between pl-6"
         >
-          <div className="flex flex-col items-start leading-tight">
-            <span className="text-[10px] uppercase tracking-tighter opacity-70">Limitied Offer</span>
-            <span className="text-sm font-bold">GET ACCESS NOW</span>
+          <div className="flex flex-col">
+            <span className="text-[10px] text-[#FFD700] font-bold uppercase tracking-widest">Only R200 Today</span>
+            <div className="flex items-center gap-2">
+              <Clock className="w-3 h-3 text-white/40" />
+              <span className="text-xs font-heading">{timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s</span>
+            </div>
           </div>
-          <div className="bg-white/20 px-4 py-1.5 rounded-xl font-heading text-lg">R200</div>
-        </Button>
+          <Button 
+            onClick={openPurchaseModal}
+            className="bg-[#D91B1B] hover:bg-[#B71616] text-white font-bold h-14 px-6 rounded-2xl active:scale-95 transition-all text-xs"
+          >
+            CLAIM ACCESS <ArrowRight className="ml-1 w-4 h-4" />
+          </Button>
+        </motion.div>
       </div>
     </div>
   );
