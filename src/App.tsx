@@ -49,15 +49,15 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-// Import local assets
-import heroVideo from "./assets/hero-video.mp4";
-import heroVideoAlt from "./assets/hero-video-alt.mp4";
-import instructorImg from "./assets/instructor.jpg";
-import proofAccessImg from "./assets/proof-access.jpg";
-import proofEarningsImg from "./assets/proof-earnings.jpg";
-import proofNigeriaImg from "./assets/proof-nigeria.jpg";
-import proofPaymentImg from "./assets/proof-payment.jpg";
-import proofReceiptImg from "./assets/proof-receipt.jpg";
+// Asset paths (from public folder)
+const heroVideo = "/assets/hero-video.mp4";
+const heroVideoAlt = "/assets/hero-video-alt.mp4";
+const instructorImg = "/assets/instructor.jpg";
+const proofAccessImg = "/assets/proof-access.jpg";
+const proofEarningsImg = "/assets/proof-earnings.jpg";
+const proofNigeriaImg = "/assets/proof-nigeria.jpg";
+const proofPaymentImg = "/assets/proof-payment.jpg";
+const proofReceiptImg = "/assets/proof-receipt.jpg";
 
 const WHATSAPP_NUMBER = "2348112222684";
 const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=Hello! I'm interested in the Amomak Digital Academy 20 Course Bundle for R200. Please give me access.`;
