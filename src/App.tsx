@@ -341,7 +341,8 @@ export default function App() {
             preload="auto"
             className="w-full h-full object-cover opacity-60"
           >
-            <source src="/60fb817a-74bc-4898-a3df-6a6f0d7167de.mp4" type="video/mp4" />
+            <source src="/hero-video.mp4" type="video/mp4" />
+            <source src="/hero-video-alt.mp4" type="video/mp4" />
           </video>
           <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black/80" />
         </div>
@@ -525,7 +526,7 @@ export default function App() {
               <div className="absolute inset-0 bg-[#FFD700] rounded-[40px] md:rounded-[60px] rotate-6 z-0" />
               <div className="relative z-10 aspect-[4/5] bg-black rounded-[40px] md:rounded-[60px] overflow-hidden border-4 border-white shadow-2xl">
                 <img 
-                  src="/d9d41f6b647531ad35b7af392cf1b939.jpg" 
+                  src="/instructor.jpg" 
                   className="w-full h-full object-cover" 
                   alt="Lead Instructor"
                   referrerPolicy="no-referrer"
@@ -805,7 +806,7 @@ export default function App() {
                     <div className="bg-[#202c33] p-3 rounded-2xl rounded-tl-none max-w-[85%] text-[13px] shadow-lg border border-white/5 space-y-3">
                        <div className="relative group">
                           <img 
-                            src="/proofb.jfif" 
+                            src="/proof-receipt.jpg" 
                             alt="Payment Proof" 
                             className="w-full h-48 object-cover rounded-xl border border-white/10"
                           />
@@ -880,11 +881,11 @@ export default function App() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
             {[
-              { img: "/7e72b66a-cdc3-412f-8956-1f9fa4e148b1.jfif", title: "Instant Access", text: "Student getting link seconds after payment." },
-              { img: "/d4eb593d-f0c1-4dae-8b28-73072c7a29dc.jfif", title: "Earnings Proof", text: "Reselling the bundle for 100% profit." },
-              { img: "/69cbf125-b634-48d4-8b42-001fdb208ccc.jfif", title: "Payment Confirmation", text: "Successful R200 transactions." },
-              { img: "/a39b6d6e-467c-4d70-a891-3bfff4cf51b0.jfif", title: "Nigerian Success", text: "Local students scaling their digital skills." },
-              { img: "/proofb.jfif", title: "Verified Receipt", text: "Official transaction proof from bank app." },
+              { img: "/proof-access.jpg", title: "Instant Access", text: "Student getting link seconds after payment." },
+              { img: "/proof-earnings.jpg", title: "Earnings Proof", text: "Reselling the bundle for 100% profit." },
+              { img: "/proof-payment.jpg", title: "Payment Confirmation", text: "Successful R200 transactions." },
+              { img: "/proof-nigeria.jpg", title: "Nigerian Success", text: "Local students scaling their digital skills." },
+              { img: "/proof-receipt.jpg", title: "Verified Receipt", text: "Official transaction proof from bank app." },
               { img: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=2574&auto=format&fit=crop", title: "Global Reach", text: "Joining our 50k+ strong community." }
             ].map((item, i) => (
               <motion.div 
