@@ -6,16 +6,15 @@
 import { useState, useEffect, useRef } from "react";
 import { motion } from "motion/react";
 
-// Asset paths (from public folder)
-const ASSET_VERSION = "v1.1";
-const heroVideo = `/assets/hero-video.mp4?${ASSET_VERSION}`;
-const heroVideoAlt = `/assets/hero-video-alt.mp4?${ASSET_VERSION}`;
-const instructorImg = `/assets/instructor.jpg?${ASSET_VERSION}`;
-const proofAccessImg = `/assets/proof-access.jpg?${ASSET_VERSION}`;
-const proofEarningsImg = `/assets/proof-earnings.jpg?${ASSET_VERSION}`;
-const proofNigeriaImg = `/assets/proof-nigeria.jpg?${ASSET_VERSION}`;
-const proofPaymentImg = `/assets/proof-payment.jpg?${ASSET_VERSION}`;
-const proofReceiptImg = `/assets/proof-receipt.jpg?${ASSET_VERSION}`;
+// Import assets (Vite handles hashing and bundling)
+import heroVideo from "./assets/hero-video.mp4";
+import heroVideoAlt from "./assets/hero-video-alt.mp4";
+import instructorImg from "./assets/instructor.jpg";
+import proofAccessImg from "./assets/proof-access.jpg";
+import proofEarningsImg from "./assets/proof-earnings.jpg";
+import proofNigeriaImg from "./assets/proof-nigeria.jpg";
+import proofPaymentImg from "./assets/proof-payment.jpg";
+import proofReceiptImg from "./assets/proof-receipt.jpg";
 
 import { 
   Smartphone, 
