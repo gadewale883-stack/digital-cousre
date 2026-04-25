@@ -6,15 +6,15 @@
 import { useState, useEffect, useRef } from "react";
 import { motion } from "motion/react";
 
-// Import assets (Vite handles hashing and bundling)
-import heroVideo from "./assets/hero-video.mp4";
-import heroVideoAlt from "./assets/hero-video-alt.mp4";
-import instructorImg from "./assets/instructor.jpg";
-import proofAccessImg from "./assets/proof-access.jpg";
-import proofEarningsImg from "./assets/proof-earnings.jpg";
-import proofNigeriaImg from "./assets/proof-nigeria.jpg";
-import proofPaymentImg from "./assets/proof-payment.jpg";
-import proofReceiptImg from "./assets/proof-receipt.jpg";
+// Asset paths (from public folder)
+const heroVideo = "assets/hero-video.mp4";
+const heroVideoAlt = "assets/hero-video-alt.mp4";
+const instructorImg = "assets/instructor.jpg";
+const proofAccessImg = "assets/proof-access.jpg";
+const proofEarningsImg = "assets/proof-earnings.jpg";
+const proofNigeriaImg = "assets/proof-nigeria.jpg";
+const proofPaymentImg = "assets/proof-payment.jpg";
+const proofReceiptImg = "assets/proof-receipt.jpg";
 
 import { 
   Smartphone, 
@@ -359,7 +359,6 @@ export default function App() {
             muted
             loop
             playsInline
-            preload="auto"
             className="w-full h-full object-cover opacity-60"
             poster={instructorImg}
           >
