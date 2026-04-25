@@ -3,8 +3,20 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "motion/react";
+
+// Asset paths (from public folder)
+const ASSET_VERSION = "v1.1";
+const heroVideo = `/assets/hero-video.mp4?${ASSET_VERSION}`;
+const heroVideoAlt = `/assets/hero-video-alt.mp4?${ASSET_VERSION}`;
+const instructorImg = `/assets/instructor.jpg?${ASSET_VERSION}`;
+const proofAccessImg = `/assets/proof-access.jpg?${ASSET_VERSION}`;
+const proofEarningsImg = `/assets/proof-earnings.jpg?${ASSET_VERSION}`;
+const proofNigeriaImg = `/assets/proof-nigeria.jpg?${ASSET_VERSION}`;
+const proofPaymentImg = `/assets/proof-payment.jpg?${ASSET_VERSION}`;
+const proofReceiptImg = `/assets/proof-receipt.jpg?${ASSET_VERSION}`;
+
 import { 
   Smartphone, 
   Target, 
@@ -48,16 +60,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-
-// Asset paths (from public folder)
-const heroVideo = "/assets/hero-video.mp4";
-const heroVideoAlt = "/assets/hero-video-alt.mp4";
-const instructorImg = "/assets/instructor.jpg";
-const proofAccessImg = "/assets/proof-access.jpg";
-const proofEarningsImg = "/assets/proof-earnings.jpg";
-const proofNigeriaImg = "/assets/proof-nigeria.jpg";
-const proofPaymentImg = "/assets/proof-payment.jpg";
-const proofReceiptImg = "/assets/proof-receipt.jpg";
 
 const WHATSAPP_NUMBER = "2348112222684";
 const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=Hello! I'm interested in the Amomak Digital Academy 20 Course Bundle for R200. Please give me access.`;
@@ -119,6 +121,15 @@ export default function App() {
   const [isPurchaseModalOpen, setIsPurchaseModalOpen] = useState(false);
   const [viewingCount, setViewingCount] = useState(142);
   const [activeTab, setActiveTab] = useState<"privacy" | "terms" | null>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.play().catch(error => {
+        console.error("Video autoplay failed:", error);
+      });
+    }
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -344,6 +355,7 @@ export default function App() {
         {/* Video Background */}
         <div className="absolute inset-0 z-0 bg-black">
           <video
+            ref={videoRef}
             autoPlay
             muted
             loop
